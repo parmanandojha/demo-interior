@@ -2,34 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-sans: Arial, Helvetica, sans-serif;
-  --font-serif: Arial, Helvetica, sans-serif;
-}
-
 html, body { background: #f4f0ea; color: #0a0a0a; }
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 15px;
-  line-height: 1.6;
-  letter-spacing: -0.005em;
+  line-height: 1.2;
+  letter-spacing: 0;
+  font-weight: 400;
 }
 
-/* Tighten tracking on large Arial type */
-.font-serif { letter-spacing: -0.02em; }
-.text-display { letter-spacing: -0.045em; }
-.text-section, .text-hero { letter-spacing: -0.035em; }
-.text-card { letter-spacing: -0.02em; }
-
-/* Arial italic looks weak — force upright on display-class type */
-.font-serif.italic, .font-serif em, .font-serif i { font-style: normal; }
+/* Editorial serif — refined tracking for luxury feel */
+.font-serif { letter-spacing: -0.005em; font-weight: 400; }
+.text-display { letter-spacing: -0.025em; }
+.text-section, .text-hero { letter-spacing: -0.02em; }
+.text-card { letter-spacing: -0.01em; }
 
 /* Refined eyebrow */
 .eyebrow { font-weight: 500; font-size: 11px; letter-spacing: 0.16em; }
 
 /* Body lead paragraph */
-p { line-height: 1.65; }
+p { line-height: 1.2; }
 
 ::selection { background: #0a0a0a; color: #f4f0ea; }
 
@@ -62,8 +55,8 @@ p { line-height: 1.65; }
   display: block;
   overflow: hidden;
   /* Give descenders (g, y, p) room without altering visual rhythm */
-  padding-bottom: 0.18em;
-  margin-bottom: -0.12em;
+  padding-bottom: 0.3em;
+  margin-bottom: -0.2em;
 }
 .split-line > span {
   display: block;
