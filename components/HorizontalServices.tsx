@@ -53,33 +53,21 @@ export default function HorizontalServices() {
     if (!wrapEl || !trackEl) return;
 
     const ctx = gsap.context(() => {
-      const getTotal = () => trackEl.scrollWidth - window.innerWidth;
+      const total = trackEl.scrollWidth - window.innerWidth;
       gsap.to(trackEl, {
-        x: () => -getTotal(),
+        x: -total,
         ease: "none",
         scrollTrigger: {
           trigger: wrapEl,
           start: "top top",
-          end: () => `+=${getTotal()}`,
+          end: () => `+=${total}`,
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
-          anticipatePin: 1,
         },
       });
     }, wrap);
-
-    // Refresh after fonts/images settle so scrollWidth is accurate
-    const refresh = () => ScrollTrigger.refresh();
-    const t1 = window.setTimeout(refresh, 300);
-    const t2 = window.setTimeout(refresh, 1200);
-    if (document.fonts?.ready) document.fonts.ready.then(refresh);
-
-    return () => {
-      window.clearTimeout(t1);
-      window.clearTimeout(t2);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

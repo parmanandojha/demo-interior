@@ -7,7 +7,6 @@ import Parallax from "@/components/Parallax";
 import StickyScene from "@/components/StickyScene";
 import HorizontalServices from "@/components/HorizontalServices";
 import ProcessIndex from "@/components/ProcessIndex";
-import HeroSlideshow from "@/components/HeroSlideshow";
 
 const projects = [
   { slug: "atherton", title: "Atherton Pavilion", location: "Atherton, CA", year: "2025", img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80", tag: "Residential" },
@@ -19,8 +18,52 @@ const projects = [
 export default function Home() {
   return (
     <>
-      {/* HERO SLIDESHOW */}
-      <HeroSlideshow />
+      {/* HERO */}
+      <section className="shell pt-48 pb-12">
+        <div className="grid-12 items-end">
+          <div className="col-span-12 lg:col-span-8">
+            <Reveal y={20}><p className="eyebrow opacity-60 mb-8">Issue 04 — Spring 2026</p></Reveal>
+            <SplitText
+              as="h1"
+              className="font-serif text-display"
+              stagger={0.12}
+            >
+              {"Spaces that change\nhow you live\nin them."}
+            </SplitText>
+          </div>
+          <Reveal className="col-span-12 lg:col-span-4 lg:pl-8" delay={0.4}>
+            <p className="text-lead max-w-sm">
+              Noma is an architecture and interior design studio based in Silver Lake,
+              Los Angeles. We design for the people who live there, the moments that
+              unfold, and the choices that shape it.
+            </p>
+            <Link href="/work" className="btn-arrow mt-10 inline-flex eyebrow opacity-80 hover:opacity-100">
+              <span className="dot" /> See selected work →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* HERO IMAGE STRIP — parallax */}
+      <section className="shell">
+        <div className="grid-12 gap-3">
+          <Parallax className="col-span-12 lg:col-span-8 aspect-[16/10] rounded-sm bg-ink" amount={120}>
+            <Image
+              src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1800&q=80"
+              alt="Featured project"
+              fill
+              className="object-cover"
+              priority
+            />
+          </Parallax>
+          <Parallax className="col-span-6 lg:col-span-2 aspect-[3/4] rounded-sm bg-ink" amount={80}>
+            <Image src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80" alt="Detail" fill className="object-cover" />
+          </Parallax>
+          <Parallax className="col-span-6 lg:col-span-2 aspect-[3/4] rounded-sm bg-ink" amount={150}>
+            <Image src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=900&q=80" alt="Detail" fill className="object-cover" />
+          </Parallax>
+        </div>
+      </section>
 
       {/* STATS */}
       <section className="shell mt-40">

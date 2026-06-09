@@ -14,21 +14,14 @@ const links = [
 export default function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 12);
-      setPastHero(window.scrollY > window.innerHeight - 80);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, [pathname]);
-
-  // White nav only when on home page AND still over the hero slideshow
-  const overHero = pathname === "/" && !pastHero && !open;
+  }, []);
 
   // close on route change
   useEffect(() => {
@@ -51,11 +44,7 @@ export default function Nav() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          overHero
-            ? "bg-transparent text-bone"
-            : scrolled || open
-            ? "bg-bone/85 backdrop-blur-md text-ink"
-            : "bg-transparent text-ink"
+          scrolled || open ? "bg-bone/85 backdrop-blur-md" : "bg-transparent"
         }`}
       >
         <div className="shell grid-12 items-center py-4">
@@ -85,13 +74,9 @@ export default function Nav() {
             <Link
               href="/contact"
               aria-label="Start a project"
-              className={`inline-flex items-center gap-2 whitespace-nowrap border rounded-full px-3 py-1.5 md:px-4 md:py-2 transition-colors ${
-                overHero
-                  ? "border-bone/70 hover:bg-bone hover:text-ink"
-                  : "border-ink/70 hover:bg-ink hover:text-bone"
-              }`}
+              className="inline-flex items-center gap-2 whitespace-nowrap border border-ink/70 rounded-full px-3 py-1.5 md:px-4 md:py-2 hover:bg-ink hover:text-bone transition-colors"
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${overHero ? "bg-bone" : "bg-ink"}`} />
+              <span className="w-1.5 h-1.5 rounded-full bg-ink" />
               <span>Start a project</span>
             </Link>
 
@@ -104,12 +89,12 @@ export default function Nav() {
               className="md:hidden relative w-9 h-9 flex items-center justify-center -mr-2 shrink-0"
             >
               <span
-                className={`block absolute h-px w-6 transition-all duration-300 ${overHero ? "bg-bone" : "bg-ink"} ${
+                className={`block absolute h-px w-6 bg-ink transition-all duration-300 ${
                   open ? "rotate-45" : "-translate-y-1.5"
                 }`}
               />
               <span
-                className={`block absolute h-px w-6 transition-all duration-300 ${overHero ? "bg-bone" : "bg-ink"} ${
+                className={`block absolute h-px w-6 bg-ink transition-all duration-300 ${
                   open ? "-rotate-45" : "translate-y-1.5"
                 }`}
               />
@@ -117,10 +102,7 @@ export default function Nav() {
           </div>
         </div>
         <div className="shell">
-          <div
-            className="border-t"
-            style={{ borderColor: overHero ? "rgba(244,240,234,0.2)" : "rgba(10,10,10,0.12)" }}
-          />
+          <div className="border-t hairline" />
         </div>
       </header>
 
